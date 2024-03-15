@@ -18,7 +18,7 @@ app.post('/process-images', upload.array('pictures', 4), async (req, res) => {
         const filteredImageParts = imageParts.filter(part => part !== null);
 
         const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-        const prompt = "What is in the image?.";
+        const prompt = "Given an image of a box with a visible front face featuring a marked square rectangle measuring 2 cm by 2 cm, use this square as a reference to determine the box's dimensions. Measure the length and breadth, which are the sides of the front face, and the depth, which is perpendicular to the front face. Provide the box's dimensions in the format: length * breadth * depth, using the square for scale.";
 
         const result = await model.generateContent([prompt, ...imageParts]);
         const response = await result.response;
